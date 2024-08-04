@@ -60,4 +60,10 @@ public class ProductRepositoryImpl implements ProductRepository {
         return new HashSet<>(jdbcTemplate.queryForList(sql, String.class));
     }
 
+    @Override
+    public Set<String> getAllProductIds() {
+        String sql = "SELECT productId FROM products";
+        return new HashSet<>(jdbcTemplate.queryForList(sql, String.class));
+    }
+
 }

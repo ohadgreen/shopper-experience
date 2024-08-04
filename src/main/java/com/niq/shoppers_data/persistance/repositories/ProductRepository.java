@@ -10,5 +10,6 @@ public interface ProductRepository {
     void saveOrUpdateProducts(List<Product> productList);
     Set<String> getAllCategories();
     Set<String> getAllBrands();
+    Set<String> getAllProductIds();
 
 }
