@@ -2,6 +2,7 @@ package com.niq.shoppers_data.persistance.repositories;
 
 import com.niq.shoppers_data.model.ProductByShopper;
 import com.niq.shoppers_data.persistance.mappers.ProductByShopperMapper;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
