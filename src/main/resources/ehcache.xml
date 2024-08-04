@@ -9,7 +9,7 @@
 
     <cache alias="shopperProductsCache">
         <key-type>java.lang.String</key-type>
-        <value-type>com.niq.shoppers_data.model.ProductByShopper</value-type>
+        <value-type>com.niq.shoppers_data.model.output.ProductByShopper</value-type>
         <expiry>
             <ttl unit="seconds">10000</ttl>
         </expiry>

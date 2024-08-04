@@ -1,9 +1,11 @@
 package com.niq.shoppers_data.controllers;
 
-import com.niq.shoppers_data.model.Product;
-import com.niq.shoppers_data.model.ShopperShelf;
+import com.niq.shoppers_data.model.input.Product;
+import com.niq.shoppers_data.model.input.SaveEntitiesResult;
+import com.niq.shoppers_data.model.input.ShopperShelf;
 import com.niq.shoppers_data.services.ProductsService;
 import com.niq.shoppers_data.services.ShopperToProductDataService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,12 +26,14 @@ public class InternalDataUploadController {
     }
 
     @PostMapping("/saveShopperProductsData")
-    public void saveShopperProductsData(@RequestBody List<ShopperShelf> shopperShelfList) {
-         shopperToProductDataService.saveShopperProductsData(shopperShelfList);
-     }
+    public ResponseEntity<SaveEntitiesResult> saveShopperProductsData(@RequestBody List<ShopperShelf> shopperShelfList) {
+        SaveEntitiesResult saveEntitiesResult = shopperToProductDataService.saveShopperProductsData(shopperShelfList);
+        return ResponseEntity.ok(saveEntitiesResult);
+    }
 
      @PostMapping("/saveProducts")
-        public void saveProducts(@RequestBody List<Product> productList) {
-            productsService.saveProductList(productList);
-        }
+        public ResponseEntity<SaveEntitiesResult> saveProducts(@RequestBody List<Product> productList) {
+         SaveEntitiesResult saveEntitiesResult = productsService.saveProductList(productList);
+         return ResponseEntity.ok(saveEntitiesResult);
+     }
 }

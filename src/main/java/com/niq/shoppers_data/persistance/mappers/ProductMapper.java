@@ -1,6 +1,6 @@
 package com.niq.shoppers_data.persistance.mappers;
 
-import com.niq.shoppers_data.model.Product;
+import com.niq.shoppers_data.model.input.Product;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
 

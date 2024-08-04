@@ -1,6 +1,7 @@
 package com.niq.shoppers_data.services;
 
-import com.niq.shoppers_data.model.Product;
+import com.niq.shoppers_data.model.input.Product;
+import com.niq.shoppers_data.model.input.SaveEntitiesResult;
 import com.niq.shoppers_data.persistance.repositories.ProductRepository;
 import org.springframework.stereotype.Service;
 
@@ -16,8 +17,8 @@ public class ProductsServiceImpl implements ProductsService {
     }
 
     @Override
-    public void saveProductList(List<Product> productList) {
-        productRepository.saveOrUpdateProducts(productList);
+    public SaveEntitiesResult saveProductList(List<Product> productList) {
+        return productRepository.saveOrUpdateProducts(productList);
     }
 
     @Override

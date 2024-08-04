@@ -1,7 +1,8 @@
 package com.niq.shoppers_data.services;
 
-import com.niq.shoppers_data.model.ShopperShelf;
-import com.niq.shoppers_data.model.ShopperToProduct;
+import com.niq.shoppers_data.model.input.SaveEntitiesResult;
+import com.niq.shoppers_data.model.input.ShopperShelf;
+import com.niq.shoppers_data.model.input.ShopperToProduct;
 import com.niq.shoppers_data.persistance.repositories.ProductRepository;
 import com.niq.shoppers_data.persistance.repositories.ShopperToProductRepository;
 import org.springframework.stereotype.Service;
@@ -23,8 +24,9 @@ public class ShopperToProductDataServiceImpl implements ShopperToProductDataServ
     }
 
     @Override
-    public void saveShopperProductsData(List<ShopperShelf> shopperShelfList) {
+    public SaveEntitiesResult saveShopperProductsData(List<ShopperShelf> shopperShelfList) {
         Set<String> allProductIds = productRepository.getAllProductIds();
+        List<String> saveErrorsList = new ArrayList<>();
 
         List<ShopperToProduct> shopperToProductList = new ArrayList<>();
         for (ShopperShelf shopperShelf : shopperShelfList) {
@@ -32,6 +34,7 @@ public class ShopperToProductDataServiceImpl implements ShopperToProductDataServ
             for (int i = 0; i < shopperShelf.getShelf().size(); i++) {
                 if (!allProductIds.contains(shopperShelf.getShelf().get(i).getProductId())) {
                     logger.warning("Product with id " + shopperShelf.getShelf().get(i).getProductId() + " does not exist in the database");
+                    saveErrorsList.add(shopperShelf.getShelf().get(i).getProductId() + " productId does not exist in the database");
                     continue;
                 }
 
@@ -42,6 +45,12 @@ public class ShopperToProductDataServiceImpl implements ShopperToProductDataServ
                 shopperToProductList.add(shopperToProduct);
             }
         }
-        shopperToProductRepository.saveOrUpdateShopperToProductList(shopperToProductList);
+        SaveEntitiesResult saveEntitiesResult = shopperToProductRepository.saveOrUpdateShopperToProductList(shopperToProductList);
+        saveEntitiesResult.setErrors(saveErrorsList);
+        if (saveErrorsList.size() > 0) {
+            int failedEntitiesCount = saveEntitiesResult.getFailedEntitiesCount();
+            saveEntitiesResult.setFailedEntitiesCount(failedEntitiesCount + saveErrorsList.size());
+        }
+        return saveEntitiesResult;
     }
 }

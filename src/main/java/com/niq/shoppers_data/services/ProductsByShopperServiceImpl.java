@@ -1,8 +1,7 @@
 package com.niq.shoppers_data.services;
 
-import com.niq.shoppers_data.model.ProductByShopper;
+import com.niq.shoppers_data.model.output.ProductByShopper;
 import com.niq.shoppers_data.persistance.repositories.ProductsByShopperRepository;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

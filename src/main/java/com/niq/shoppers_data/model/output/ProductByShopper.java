@@ -1,4 +1,4 @@
-package com.niq.shoppers_data.model;
+package com.niq.shoppers_data.model.output;
 
 public class ProductByShopper {
     private String shopperId;

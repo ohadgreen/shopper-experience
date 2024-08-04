@@ -1,6 +1,6 @@
 package com.niq.shoppers_data.controllers;
 
-import com.niq.shoppers_data.model.ProductByShopper;
+import com.niq.shoppers_data.model.output.ProductByShopper;
 import com.niq.shoppers_data.services.ProductsByShopperService;
 import com.niq.shoppers_data.services.ProductsService;
 import org.springframework.web.bind.annotation.GetMapping;

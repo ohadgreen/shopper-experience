@@ -1,4 +1,4 @@
-package com.niq.shoppers_data.model;
+package com.niq.shoppers_data.model.input;
 
 import org.springframework.data.annotation.Transient;
 
