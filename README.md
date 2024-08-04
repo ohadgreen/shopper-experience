@@ -14,5 +14,8 @@ Environment Variables:
 3. MYSQL_PASSWORD
 
 Build and Run:
-1. ./gradlew clean build
+1. ./gradlew clean build -x test
 2. java -jar build/libs/shoppers-data-0.0.1-SNAPSHOT.jar -DMYSQL_URL=`<db url>` -DMYSQL_USERNAME=`<db username>` -DMYSQL_PASSWORD=`<db pw>`
+
+Documentation:
+http://localhost:8080/swagger-ui/index.html#/
