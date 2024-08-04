@@ -1,7 +1,7 @@
 # Shopper Personalized Data API
 There are two interfaces to this API:
-1. Internal API that enables products metadata and shopper-products relations
-2. External API that enables querying shopper data
+1. Internal API that enables uploading products metadata and shopper-products relations
+2. External API that enables querying shopper's data
 
 Pre-requisites:
 1. Java 8
