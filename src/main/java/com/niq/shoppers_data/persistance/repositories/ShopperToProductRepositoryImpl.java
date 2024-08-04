@@ -5,6 +5,8 @@ import com.niq.shoppers_data.persistance.mappers.ShopperToProductMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public class ShopperToProductRepositoryImpl implements ShopperToProductRepository {
 
@@ -23,8 +25,16 @@ public class ShopperToProductRepositoryImpl implements ShopperToProductRepositor
     }
 
     @Override
-    public ShopperToProduct getShopperToProduct(String shopperId, String productId) {
-        return jdbcTemplate.queryForObject("SELECT * FROM shopper_to_product WHERE shopperId = ? AND productId = ?",
-                shopperToProductMapper, shopperId, productId);
+    public void saveOrUpdateShopperToProductList(List<ShopperToProduct> shopperToProductList) {
+        String sql = "INSERT INTO shopper_to_product (shopperId, productId, relevancyScore, created, modified) VALUES (?, ?, ?, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP) " +
+                "ON DUPLICATE KEY UPDATE relevancyScore = VALUES(relevancyScore), modified = CURRENT_TIMESTAMP";
+
+        jdbcTemplate.batchUpdate(sql, shopperToProductList, shopperToProductList.size(),
+                (ps, shopperToProduct) -> {
+                    ps.setString(1, shopperToProduct.getShopperId());
+                    ps.setString(2, shopperToProduct.getProductId());
+                    ps.setDouble(3, shopperToProduct.getRelevancyScore());
+                });
     }
+
 }

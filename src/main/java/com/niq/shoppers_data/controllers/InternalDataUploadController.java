@@ -23,9 +23,9 @@ public class InternalDataUploadController {
         this.shopperToProductDataService = shopperToProductDataService;
     }
 
-    @PostMapping("/uploadShopperProductsData")
-    public void uploadShopperProductsData(@RequestBody List<ShopperShelf> shopperShelfList) {
-         shopperToProductDataService.uploadShopperProductsData(shopperShelfList);
+    @PostMapping("/saveShopperProductsData")
+    public void saveShopperProductsData(@RequestBody List<ShopperShelf> shopperShelfList) {
+         shopperToProductDataService.saveShopperProductsData(shopperShelfList);
      }
 
      @PostMapping("/saveProducts")

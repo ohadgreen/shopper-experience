@@ -5,6 +5,7 @@ import com.niq.shoppers_data.model.ShopperToProduct;
 import com.niq.shoppers_data.persistance.repositories.ShopperToProductRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -16,7 +17,8 @@ public class ShopperToProductDataServiceImpl implements ShopperToProductDataServ
     }
 
     @Override
-    public void uploadShopperProductsData(List<ShopperShelf> shopperShelfList) {
+    public void saveShopperProductsData(List<ShopperShelf> shopperShelfList) {
+        List<ShopperToProduct> shopperToProductList = new ArrayList<>();
         for (ShopperShelf shopperShelf : shopperShelfList) {
             String shopperId = shopperShelf.getShopperId();
             for (int i = 0; i < shopperShelf.getShelf().size(); i++) {
@@ -24,8 +26,9 @@ public class ShopperToProductDataServiceImpl implements ShopperToProductDataServ
                 shopperToProduct.setShopperId(shopperId);
                 shopperToProduct.setProductId(shopperShelf.getShelf().get(i).getProductId());
                 shopperToProduct.setRelevancyScore(shopperShelf.getShelf().get(i).getRelevancyScore());
-                shopperToProductRepository.saveShopperToProduct(shopperToProduct);
+                shopperToProductList.add(shopperToProduct);
             }
         }
+        shopperToProductRepository.saveOrUpdateShopperToProductList(shopperToProductList);
     }
 }
